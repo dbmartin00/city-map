@@ -13,6 +13,8 @@ mvn exec:java
 
 I ran with command-line Maven.  You can run from an IDE.
 
+The built-in flag reference is... 
+
 ```
 map_of_cities
 ```
@@ -21,6 +23,8 @@ map_of_cities
 The flag has no dynamic config, but the fun comes in using a "radius" attribute.  Radius is a number. All the cities in the demo are evaluated with a radius attribute reflecting their distance from San Francisco.
 
 The user interface is in the console window, a map of the US with colored dots reflecting the feature rollout.
+
+The demo uses SDK_UPDATE, so it will update instantly especially to a kill.
 
 David Martin
 
