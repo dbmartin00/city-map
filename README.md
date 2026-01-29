@@ -24,7 +24,5 @@ The flag has no dynamic config, but the fun comes in using a "radius" attribute.
 
 The user interface is in the console window, a map of the US with colored dots reflecting the feature rollout.
 
-The demo uses SDK_UPDATE, so it will update instantly especially to a kill.
-
 David Martin
 
