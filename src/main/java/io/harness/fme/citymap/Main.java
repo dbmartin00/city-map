@@ -3,11 +3,12 @@ package io.harness.fme.citymap;
 import io.split.client.SplitFactoryBuilder;
 import io.split.client.SplitClient;
 import io.split.client.SplitClientConfig;
-import java.util.concurrent.TimeoutException;
-
 import java.util.*;
 
 public class Main {
+
+    private static final double SF_LATITUDE = 37.7562;
+    private static final double SF_LONGITUDE = -122.4430;
 
     public static void main(String[] args) throws Exception {
         List<City> cities = CityLoader.loadCities();
@@ -23,8 +24,12 @@ public class Main {
           .setBlockUntilReadyTimeout(5000)
           .build();
 
-        SplitClient client = SplitFactoryBuilder.build(apiKey, config).client(); 
+        SplitClient client = SplitFactoryBuilder.build(apiKey, config).client();
         client.blockUntilReady();
+
+        Runtime.getRuntime().addShutdownHook(new Thread(() -> {
+            client.destroy();
+        }));
 
         MapRenderer renderer = new MapRenderer(width, height);
 
@@ -34,7 +39,7 @@ public class Main {
             
             // refresh treatments
             for (City city : cities) {
-                int radius = GeoUtils.distance(37.7562, -122.4430,
+                int radius = GeoUtils.distance(SF_LATITUDE, SF_LONGITUDE,
                         city.getLatitude(), city.getLongitude());
                 Map<String, Object> attrs = Map.of("radius", radius);
 
